@@ -63,6 +63,20 @@ function init() {
   console.log('うわあ！美川さんだあ！！！美川さん！美川さん！');
 }
 
+function search() {
+  let 美川さんの星座;
+  let 美川さんの性別;
+  let 返事 = false;
+
+  while(!返事) {
+    美川さんの星座 = 星座リスト[Math.floor(Math.random() * 星座リスト.length)];
+    美川さんの性別 = 性別リスト[Math.floor(Math.random() * 性別リスト.length)];;
+  
+    console.log(美川さんの星座+'の'+美川さんの性別+'ですか？');
+    返事 = 美川さん.isAsked(美川さんの星座, 美川さんの性別);
+  }
+}
+
 function search2() {
   for (const 星座 of 星座リスト) {
     for (const 性別 of 性別リスト) {
@@ -112,7 +126,7 @@ function search2() {
 }
 
 init();
-search3();
+search();
 美川さん.startSinging();
 
 
