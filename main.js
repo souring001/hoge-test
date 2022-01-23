@@ -9,10 +9,15 @@ const 星座リスト = ['おひつじ座', 'おうし座', 'ふたご座', 'か
                   'いて座', 'やぎ座', 'みずがめ座', 'うお座'];
 const 性別リスト = ['男', '女'];
 
-class Mikawa {
-  constructor(星座, 性別) {
-    this.星座 = 星座;
-    this.性別 = 性別;
+class Singer {
+  #名前;
+  #星座;
+  #性別;
+
+  constructor(名前, 星座, 性別) {
+    this.#名前 = 名前;
+    this.#星座 = 星座;
+    this.#性別 = 性別;
     this.気持ちよく歌いだせるか = false;
   }
 
@@ -22,15 +27,15 @@ class Mikawa {
 
   startSinging() {
     if (this.気持ちよく歌いだせるか) {
-      console.log('そうよ！私は'+this.星座+'の'+this.性別+'〜♪');
+      console.log('そうよ！私は'+this.#星座+'の'+this.#性別+'〜♪');
     } else {
-      console.log('いいえ、私は'+this.星座+'の'+this.性別+'〜♪');
+      console.log('いいえ、私は'+this.#星座+'の'+this.#性別+'〜♪');
       this.feelsSad();
     }
   }
 
   isAsked(星座, 性別) {
-    if (this.星座 == 星座 && this.性別 == 性別) {
+    if (this.#星座 == 星座 && this.#性別 == 性別) {
       console.log('(頷く)');
       this.気持ちよく歌いだせるか = true;
       return true;
@@ -44,8 +49,12 @@ class Mikawa {
     return;
   }
 
+  name() {
+    return 美川さん.#名前;
+  }
+
   isGender(性別) {
-    if (this.性別 == 性別) {
+    if (this.#性別 == 性別) {
       console.log('(頷く)');
       return true;
     } else {
@@ -55,7 +64,7 @@ class Mikawa {
   }
 
   isSign(星座) {
-    if (this.星座 == 星座) {
+    if (this.#星座 == 星座) {
       console.log('(頷く)');
       return true;
     } else {
@@ -65,7 +74,7 @@ class Mikawa {
   }
 
   isGreaterSign(星座) {
-    if (星座順[this.星座] > 星座順[星座]) {
+    if (星座順[this.#星座] > 星座順[星座]) {
       console.log('(頷く)');
       return true;
     } else {
@@ -75,7 +84,7 @@ class Mikawa {
   }
 
   isGreaterGender(性別) {
-    if (性別順[this.性別] > 性別順[性別]) {
+    if (性別順[this.#性別] > 性別順[性別]) {
       console.log('(頷く)');
       return true;
     } else {
@@ -87,22 +96,22 @@ class Mikawa {
 }
 
 function init() {
-  美川さん = new Mikawa('さそり座', '女');
+  美川さん = new Singer('美川', 'さそり座', '女');
   美川さん.startIntro();
-  console.log('わー！美川さんだー！！！美川さん！美川さん！');
+  console.log('わー！'+美川さん.name()+'さんだー！！！'+美川さん.name()+'さん！'+美川さん.name()+'さん！');
 }
 
 function search() {
-  let 美川さんの星座;
-  let 美川さんの性別;
+  let 星座;
+  let 性別;
   let 返事 = false;
 
   while(!返事) {
-    美川さんの星座 = 星座リスト[Math.floor(Math.random() * 星座リスト.length)];
-    美川さんの性別 = 性別リスト[Math.floor(Math.random() * 性別リスト.length)];;
+    星座 = 星座リスト[Math.floor(Math.random() * 星座リスト.length)];
+    性別 = 性別リスト[Math.floor(Math.random() * 性別リスト.length)];;
   
-    console.log(美川さんの星座+'の'+美川さんの性別+'ですか？');
-    返事 = 美川さん.isAsked(美川さんの星座, 美川さんの性別);
+    console.log(星座+'の'+性別+'ですか？');
+    返事 = 美川さん.isAsked(星座, 性別);
   }
 }
 
@@ -119,35 +128,33 @@ function search2() {
 }
 
 function search3() {
-  let 美川さんの星座;
-  let 美川さんの性別;
+  let 星座;
+  let 性別;
 
-  for (const 星座 of 星座リスト) {
+  for (星座 of 星座リスト) {
     console.log(星座+'ですか？');
     if (美川さん.isSign(星座)) {
-      美川さんの星座 = 星座;
       break;
     }
   }
 
-  for (const 性別 of 性別リスト) {
+  for (性別 of 性別リスト) {
     console.log(性別+'ですか？');
     if (美川さん.isGender(性別)) {
-      美川さんの性別 = 性別;
       break;
     }
   }
 
-  console.log('ってことは'+美川さんの星座+'の'+美川さんの性別+'ですね？');
-  美川さん.isAsked(美川さんの星座, 美川さんの性別);
+  console.log('ってことは'+星座+'の'+性別+'ですね？');
+  美川さん.isAsked(星座, 性別);
 }
 
 function search4() {
-  let 美川さんの星座 = binarySearchSign(星座リスト);;
-  let 美川さんの性別 = binarySearchGender(性別リスト);
+  let 星座 = binarySearchSign(星座リスト);;
+  let 性別 = binarySearchGender(性別リスト);
 
-  console.log('ってことは'+美川さんの星座+'の'+美川さんの性別+'ですね？');
-  美川さん.isAsked(美川さんの星座, 美川さんの性別);
+  console.log('ってことは'+星座+'の'+性別+'ですね？');
+  美川さん.isAsked(星座, 性別);
 }
 
 function binarySearchSign(星座リスト) {
@@ -183,5 +190,5 @@ function binarySearchGender(性別リスト) {
 }
 
 init();
-search4();
+search3();
 美川さん.startSinging();
