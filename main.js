@@ -13,12 +13,13 @@ class Singer {
   #名前;
   #星座;
   #性別;
+  #気持ちよく歌いだせるか;
 
   constructor(名前, 星座, 性別) {
     this.#名前 = 名前;
     this.#星座 = 星座;
     this.#性別 = 性別;
-    this.気持ちよく歌いだせるか = false;
+    this.#気持ちよく歌いだせるか = false;
   }
 
   startIntro() {
@@ -26,7 +27,7 @@ class Singer {
   }
 
   startSinging() {
-    if (this.気持ちよく歌いだせるか) {
+    if (this.#気持ちよく歌いだせるか) {
       console.log('そうよ！私は'+this.#星座+'の'+this.#性別+'〜♪');
     } else {
       console.log('いいえ、私は'+this.#星座+'の'+this.#性別+'〜♪');
@@ -37,7 +38,7 @@ class Singer {
   isAsked(星座, 性別) {
     if (this.#星座 == 星座 && this.#性別 == 性別) {
       console.log('(頷く)');
-      this.気持ちよく歌いだせるか = true;
+      this.#気持ちよく歌いだせるか = true;
       return true;
     } else {
       console.log('(首を振る)');
@@ -50,7 +51,7 @@ class Singer {
   }
 
   name() {
-    return 美川さん.#名前;
+    return this.#名前;
   }
 
   isGender(性別) {
