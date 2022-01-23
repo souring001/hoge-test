@@ -1,4 +1,8 @@
 let 美川さん;
+const 星座順 = { 'おひつじ座':0, 'おうし座':1, 'ふたご座':2, 'かに座':3, 
+                'しし座':4, 'おとめ座':5, 'てんびん座':6, 'さそり座':7, 
+                'いて座':8, 'やぎ座':9, 'みずがめ座':10, 'うお座':11 };
+const 性別順 = { '男':0, '女':1 };
 
 const 星座リスト = ['おひつじ座', 'おうし座', 'ふたご座', 'かに座', 
                   'しし座', 'おとめ座', 'てんびん座', 'さそり座', 
@@ -45,8 +49,28 @@ class Mikawa {
     }
   }
 
-  isZodiacSign(星座) {
+  isSign(星座) {
     if (this.星座 == 星座) {
+      console.log('(頷く)');
+      return true;
+    } else {
+      console.log('(首を振る)');
+      return false;
+    }
+  }
+
+  isGreaterSign(星座) {
+    if (星座順[this.星座] > 星座順[星座]) {
+      console.log('(頷く)');
+      return true;
+    } else {
+      console.log('(首を振る)');
+      return false;
+    }
+  }
+
+  isGreaterGender(性別) {
+    if (性別順[this.性別] > 性別順[性別]) {
       console.log('(頷く)');
       return true;
     } else {
@@ -60,7 +84,7 @@ class Mikawa {
 function init() {
   美川さん = new Mikawa('さそり座', '女');
   美川さん.startIntro();
-  console.log('うわあ！美川さんだあ！！！美川さん！美川さん！');
+  console.log('わー！美川さんだー！！！美川さん！美川さん！');
 }
 
 function search() {
@@ -95,7 +119,7 @@ function search3() {
 
   for (const 星座 of 星座リスト) {
     console.log(星座+'ですか？');
-    if (美川さん.isZodiacSign(星座)) {
+    if (美川さん.isSign(星座)) {
       美川さんの星座 = 星座;
       break;
     }
@@ -113,20 +137,49 @@ function search3() {
   美川さん.isAsked(美川さんの星座, 美川さんの性別);
 }
 
-function search2() {
-  for (const 星座 of 星座リスト) {
-    for (const 性別 of 性別リスト) {
-      console.log(星座+'の'+性別+'ですか？');
-      let 返事 = 美川さん.isAsked(星座, 性別);
-      if (返事) {
-        return;
-      }
+function search4() {
+  let 美川さんの星座;
+  let 美川さんの性別;
+
+  美川さんの星座 = binarySearchSign(星座リスト);
+  美川さんの性別 = binarySearchGender(性別リスト);
+
+  console.log('ってことは'+美川さんの星座+'の'+美川さんの性別+'ですね？');
+  美川さん.isAsked(美川さんの星座, 美川さんの性別);
+}
+
+function binarySearchSign(星座リスト) {
+  let iMin = 0;
+  let iMax = 星座リスト.length - 1;
+  let iMid = Math.floor((iMin + iMax) / 2);
+  while (iMin < iMax) {  
+    console.log(星座リスト[iMid + 1]+'以降の星座ですか？');
+    if (美川さん.isGreaterSign(星座リスト[iMid])) {
+      iMin = iMid + 1;
+    } else {
+      iMax = iMid;
     }
+    iMid = Math.floor((iMin + iMax) / 2);
   }
+  return 星座リスト[iMid]
+}
+
+function binarySearchGender(性別リスト) {
+  let iMin = 0;
+  let iMax = 性別リスト.length - 1;
+  let iMid = Math.floor((iMin + iMax) / 2);
+  while (iMin < iMax) {  
+    console.log('性別を名前の順にした時'+性別リスト[iMid + 1]+'以降ですか？');
+    if (美川さん.isGreaterGender(性別リスト[iMid])) {
+      iMin = iMid + 1;
+    } else {
+      iMax = iMid;
+    }
+    iMid = Math.floor((iMin + iMax) / 2);
+  }
+  return 性別リスト[iMid]
 }
 
 init();
-search();
+search4();
 美川さん.startSinging();
-
-
