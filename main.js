@@ -25,6 +25,7 @@ class Mikawa {
       console.log('そうよ！私は'+this.星座+'の'+this.性別+'〜♪');
     } else {
       console.log('いいえ、私は'+this.星座+'の'+this.性別+'〜♪');
+      this.feelsSad();
     }
   }
 
@@ -37,6 +38,10 @@ class Mikawa {
       console.log('(首を振る)');
       return false;
     }
+  }
+
+  feelsSad() {
+    return;
   }
 
   isGender(性別) {
@@ -138,11 +143,8 @@ function search3() {
 }
 
 function search4() {
-  let 美川さんの星座;
-  let 美川さんの性別;
-
-  美川さんの星座 = binarySearchSign(星座リスト);
-  美川さんの性別 = binarySearchGender(性別リスト);
+  let 美川さんの星座 = binarySearchSign(星座リスト);;
+  let 美川さんの性別 = binarySearchGender(性別リスト);
 
   console.log('ってことは'+美川さんの星座+'の'+美川さんの性別+'ですね？');
   美川さん.isAsked(美川さんの星座, 美川さんの性別);
