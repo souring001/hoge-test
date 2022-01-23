@@ -22,13 +22,13 @@ class Mikawa {
   }
 
   isAsked(星座, 性別) {
-    if (!(this.星座 == 星座 && this.性別 == 性別)) {
-      console.log('(首を振る)');
-      return false;
-    } else {
+    if (this.星座 == 星座 && this.性別 == 性別) {
       console.log('(頷く)');
       this.気持ちよく歌いだせるか = true;
       return true;
+    } else {
+      console.log('(首を振る)');
+      return false;
     }
   }
 }
@@ -52,7 +52,7 @@ function search2() {
 }
 
 init();
-search();
+search2();
 美川さん.startSinging();
 
 
